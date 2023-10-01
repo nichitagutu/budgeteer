@@ -1,4 +1,5 @@
-import PieChart from "../components/PieChart";
+import LineChart from "../components/charts/LineChart";
+import PieChart from "../components/charts/PieChart";
 
 export default function MainPage() {
   const data = [
@@ -29,9 +30,41 @@ export default function MainPage() {
     },
   ];
 
+  const lineData = [
+    {
+      day: new Date("2021-01-01"),
+      amount: 100,
+    },
+    {
+      day: new Date("2021-01-02"),
+      amount: 200,
+    },
+    {
+      day: new Date("2021-01-03"),
+      amount: 100,
+    },
+    {
+      day: new Date("2021-01-04"),
+      amount: 600,
+    },
+    {
+      day: new Date("2021-01-05"),
+      amount: 50,
+    },
+    {
+      day: new Date("2021-01-06"),
+      amount: 600,
+    },
+    {
+      day: new Date("2021-01-07"),
+      amount: 750,
+    },
+  ];
+
   return (
     <div>
       <PieChart data={data} />
+      <LineChart data={lineData} />
     </div>
   );
 }

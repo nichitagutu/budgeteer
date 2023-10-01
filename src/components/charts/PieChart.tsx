@@ -1,21 +1,12 @@
 import { useRef, useEffect } from "react";
 import * as d3 from "d3";
-
-interface PieChartData {
-  category: string;
-  amount: number;
-  color: string;
-}
-
-interface PieChartProps {
-  data: PieChartData[];
-}
+import { PieChartData, PieChartProps } from "../../types";
 
 export default function PieChart({ data }: PieChartProps) {
   const svgRef = useRef<SVGSVGElement>(null);
 
   useEffect(() => {
-    if (data && data.length) drawChart();
+    if (data !== undefined && data.length > 0) drawChart();
   }, [data]);
 
   function drawChart() {
