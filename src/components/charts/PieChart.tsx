@@ -40,7 +40,25 @@ export default function PieChart({ data }: PieChartProps) {
       .enter()
       .append("path")
       .attr("fill", (d) => d.data.color)
-      .attr("d", arc)
+      .attr("d", (d) => arc(d))
+      .each(function () {
+        d3.select(this)
+          .transition()
+          .duration(1600)
+          .attrTween("d", function (d: any) {
+            const interpolateStart = d3.interpolate(0, d.startAngle);
+            const interpolateEnd = d3.interpolate(0, d.endAngle);
+            return function (t) {
+              const dIntermediate = {
+                ...d,
+                startAngle: interpolateStart(t),
+                endAngle: interpolateEnd(t),
+              };
+
+              return arc(dIntermediate) ?? "";
+            };
+          });
+      })
       .append("title")
       .text(
         (d) => `${d.data.category}: ${d.data.amount.toLocaleString("en-US")}`

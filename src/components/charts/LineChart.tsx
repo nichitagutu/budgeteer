@@ -6,8 +6,23 @@ export default function LineChart({ data }: LineChartProps) {
   const svgRef = useRef<SVGSVGElement>(null);
 
   useEffect(() => {
-    if (data !== undefined && data.length > 0) drawChart();
+    if (data !== undefined && data.length > 0) {
+      drawChart();
+      drawOverlay();
+    }
   }, [data]);
+
+  function drawOverlay() {
+    if (!svgRef.current) return;
+  
+    const svg = d3.select(svgRef.current);
+
+    svg
+      .append("rect")
+      .attr("width", "100%")
+      .attr("height", "100%")
+      .attr("fill", "rgba(255,255,255,0.8)");
+  }
 
   function drawChart() {
     if (!svgRef.current) return;
@@ -54,7 +69,7 @@ export default function LineChart({ data }: LineChartProps) {
       .call(
         d3
           .axisBottom(x)
-          .ticks(d3.utcDay.every(2))
+          .ticks(d3.utcDay.every(3))
           .tickSize(0)
           .tickSizeOuter(0)
           .tickFormat((d) => d3.utcFormat("%b %d")(d as Date))
@@ -72,7 +87,7 @@ export default function LineChart({ data }: LineChartProps) {
       )
       .call((g) => g.select(".domain").remove());
 
-    svg
+    const path = svg
       .append("path")
       .data([data])
       .attr("fill", "none")
@@ -81,6 +96,15 @@ export default function LineChart({ data }: LineChartProps) {
       .attr("stroke-linejoin", "round")
       .attr("stroke-linecap", "round")
       .attr("d", line);
+
+    const totalLength = path.node().getTotalLength();
+
+    path
+      .attr("stroke-dasharray", totalLength)
+      .attr("stroke-dashoffset", totalLength)
+      .transition()
+      .duration(1600)
+      .attr("stroke-dashoffset", 0);
   }
 
   return <svg ref={svgRef} style={{ width: "100%", height: "250px" }} />;
