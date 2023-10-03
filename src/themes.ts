@@ -1,0 +1,47 @@
+export const AppThemes = {
+    'day-iOS': {
+      bg_color: '#ffffff',
+      text_color: '#000000',
+      hint_color: '#9e9e9e',
+      link_color: '#007aff',
+      button_color: '#007aff',
+      button_text_color: '#ffffff',
+      secondary_bg_color: '#f5f5f5',
+    },
+    'day-Android': {
+      bg_color: '#ffffff',
+      text_color: '#000000',
+      hint_color: '#9e9e9e',
+      link_color: '#6200ee',
+      button_color: '#6200ee',
+      button_text_color: '#ffffff',
+      secondary_bg_color: '#f5f5f5',
+    },
+    'night-iOS': {
+      bg_color: '#1c1c1e',
+      text_color: '#ffffff',
+      hint_color: '#636366',
+      link_color: '#0a84ff',
+      button_color: '#0a84ff',
+      button_text_color: '#1c1c1e',
+      secondary_bg_color: '#2c2c2e',
+    },
+    'night-Android': {
+      bg_color: '#121212',
+      text_color: '#ffffff',
+      hint_color: '#767676',
+      link_color: '#bb86fc',
+      button_color: '#bb86fc',
+      button_text_color: '#121212',
+      secondary_bg_color: '#1f1f1f',
+    },
+    'auto': {
+      bg_color: 'var(--tg-theme-bg-color)',
+      text_color: 'var(--tg-theme-text-color)',
+      hint_color: 'var(--tg-theme-hint-color)',
+      link_color: 'var(--tg-theme-link-color)',
+      button_color: 'var(--tg-theme-button-color)',
+      button_text_color: 'var(--tg-theme-button-text-color)',
+      secondary_bg_color: 'var(--tg-theme-secondary-bg-color)',
+    }
+  };
