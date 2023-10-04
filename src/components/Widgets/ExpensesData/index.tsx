@@ -1,11 +1,13 @@
 import styled from "styled-components";
-import PieChart from "../charts/PieChart";
-import { PieChartData } from "../../types";
-import { mockPieChartData } from "../../mock";
+import PieChart from "../../Charts/PieChart";
+import { PieChartData } from "../../../types";
+import { mockPieChartData } from "../../../mock";
 
 const Container = styled.div`
   margin: 1rem;
   background-color: ${(props) => props.theme.secondary_bg_color};
+
+  padding: 0.5rem;
 
   box-shadow: 0px 3px 1px 0px rgba(0, 0, 0, 0.04),
     0px 3px 8px 0px rgba(0, 0, 0, 0.12);

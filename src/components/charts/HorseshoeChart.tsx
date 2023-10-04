@@ -15,8 +15,8 @@ function HorseshoeChart({ percentage }: { percentage: number }) {
 
     svg.selectAll("*").remove();
 
-    const width = svgRef.current.clientWidth;
-    const height = svgRef.current.clientHeight;
+    const width = svgRef.current.parentElement!.clientWidth;
+    const height = svgRef.current.parentElement!.clientHeight;
 
     const radius = Math.min(width, height) / 2.5;
     const tau = 2 * Math.PI;
@@ -93,18 +93,12 @@ function HorseshoeChart({ percentage }: { percentage: number }) {
   }
 
   return (
-    <div style={{ width: "100%", paddingTop: "50%", position: "relative" }}>
-      <svg
-        ref={svgRef}
-        style={{
-          width: "100%",
-          height: "100%",
-          position: "absolute",
-          top: 0,
-          left: 0,
-        }}
-      />
-    </div>
+    <svg
+      ref={svgRef}
+      style={{
+        height: "100%",
+      }}
+    />
   );
 }
 

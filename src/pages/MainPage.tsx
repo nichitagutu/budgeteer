@@ -1,6 +1,7 @@
 import styled from "styled-components";
-
-import ExpensesData from "../components/ExpensesData";
+import FinancialHealth from "../components/Widgets/FinancialHealth";
+import ExpensesData from "../components/Widgets/ExpensesData";
+import { mockPieChartData } from "../mock";
 
 const MainWrapper = styled.div`
   background-color: ${(props) => props.theme.bg_color};
@@ -10,7 +11,8 @@ const MainWrapper = styled.div`
 export default function MainPage() {
   return (
     <MainWrapper>
-      <ExpensesData />
+      <ExpensesData expensesData={mockPieChartData} />
+      <FinancialHealth />
     </MainWrapper>
   );
 }
