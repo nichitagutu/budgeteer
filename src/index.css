@@ -7,7 +7,29 @@
 *,
 *::before,
 *::after {
+  user-select: none;
+  -webkit-user-select: none;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+.datePicker {
+  display: flex;
+  align-items: center;
+}
+
+.barrel {
+  height: 120px;
+  overflow: hidden;
+  border: 1px solid #ccc;
+  margin: 0 10px;
+}
+
+.item {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }

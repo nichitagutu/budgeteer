@@ -9,8 +9,6 @@ const Container = styled.div`
 
   padding: 0.5rem;
 
-  box-shadow: 0px 3px 1px 0px rgba(0, 0, 0, 0.04),
-    0px 3px 8px 0px rgba(0, 0, 0, 0.12);
   border-radius: 7px;
   display: flex;
   flex-direction: column;
@@ -105,7 +103,8 @@ export default function ExpensesData({
 }
 
 function percentageOutOf(total: number, amount: number) {
-  return (amount / total) * 100;
+  const percentage = (amount / total) * 100;
+  return percentage.toFixed(0);
 }
 
 const Categories = styled.div`

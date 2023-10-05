@@ -20,3 +20,16 @@ export const mockPieChartData = [
     color: "#FFD60A",
   },
 ];
+
+export function generateMockData(days: number) {
+  const data = [];
+  const date = new Date();
+  for (let i = 0; i < days; i++) {
+    data.push({
+      day: new Date(date.setDate(date.getDate() - 1)),
+      amount: Math.floor(Math.random() * 100000),
+    });
+  }
+
+  return data;
+}

@@ -7,6 +7,7 @@ export interface LineChartData {
 
 export interface LineChartProps {
   data: LineChartData[];
+  isMock?: boolean;
 }
 
 export interface PieChartData {
