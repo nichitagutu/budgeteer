@@ -105,7 +105,8 @@ export default function ExpensesData({
 }
 
 function percentageOutOf(total: number, amount: number) {
-  return (amount / total) * 100;
+  const percentage = (amount / total) * 100;
+  return percentage.toFixed(0);
 }
 
 const Categories = styled.div`

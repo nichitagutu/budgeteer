@@ -12,6 +12,7 @@ const Body = styled.div`
   border-radius: 9px;
   overflow: hidden;
   user-select: none;
+  width: 100%;
 `;
 
 export default function SegmentedContorolBody({

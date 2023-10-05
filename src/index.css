@@ -4,6 +4,11 @@
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
+:root {
+  /* #f0f0f0 in decimal RGB */
+  --colorss: 240, 240, 240;
+}
+
 *,
 *::before,
 *::after {

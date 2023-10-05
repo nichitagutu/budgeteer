@@ -5,7 +5,7 @@ import HorseshoeChart from "../../Charts/HorseshoeChart";
 export default function FinancialHealth({
   percentage = 0,
 }: {
-  percentage: number;
+  percentage?: number;
 }) {
   const theme = useTheme();
 
@@ -29,10 +29,6 @@ export default function FinancialHealth({
   );
 }
 
-const ChartWrapper = styled.div`
-  width: 50%;
-`;
-
 const Container = styled.div`
   align-items: center;
   margin: 1rem;
@@ -46,6 +42,10 @@ const Container = styled.div`
   flex-direction: column;
   gap: 1rem;
   min-height: 200px;
+`;
+
+const ChartWrapper = styled.div`
+  width: 50%;
 `;
 
 const Content = styled.div`
@@ -72,8 +72,8 @@ const Title = styled.h3`
 const Header = styled.h3``;
 
 const Text = styled.p`
-    text-align: center;
-    font-size: 0.8rem;
+  text-align: center;
+  font-size: 0.8rem;
 `;
 
 const Hint = styled.p`
