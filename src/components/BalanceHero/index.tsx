@@ -2,8 +2,11 @@ import InfoButton from "./InfoButton";
 import styled from "styled-components";
 import MonthPicker from "./MonthPicker";
 import GeneralBalance from "./GeneralBalance";
+import { useState } from "react";
+// import BalanceCharts from "./GeneralBalance/BalanceCharts";
 
 const Body = styled.div`
+  margin: 1rem;
   background-color: #fff;
 
   border-radius: 9px;
@@ -13,7 +16,16 @@ const Body = styled.div`
   align-items: center;
 `;
 
+// const MockData = [
+//   {
+//     date: new Date(Date.UTC(2021, 8, 1)),
+//     value: 1000,
+//   },
+// ];
+
 export default function BalanceHero() {
+  
+
   return (
     <Body>
       <InfoButton />
