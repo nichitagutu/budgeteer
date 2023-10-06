@@ -32,7 +32,7 @@ interface TabType {
 
 interface SegmentedControlProps {
   tabNames: string[];
-  onTabChange: (index: number) => void;
+  onTabChange?: (index: number) => void;
 }
 
 export default function SegmentedControl({
@@ -83,17 +83,17 @@ export default function SegmentedControl({
   }, [tabs, activeIndex, set]);
 
   return (
-    <SegmentedControlBody>
-      {tabs.map((tab, index) => (
-        <SegmentedControlTab
-          key={tab.label}
-          onClick={() => handleTabClick(index, tab.ref)}
-          tabLabel={tab.label}
-          tabRef={tab.ref}
-          isActive={index === activeIndex}
-        />
-      ))}
-      <ActiveTabIndicator style={{ left, width }} />
-    </SegmentedControlBody>
+      <SegmentedControlBody>
+        {tabs.map((tab, index) => (
+          <SegmentedControlTab
+            key={tab.label}
+            onClick={() => handleTabClick(index, tab.ref)}
+            tabLabel={tab.label}
+            tabRef={tab.ref}
+            isActive={index === activeIndex}
+          />
+        ))}
+        <ActiveTabIndicator style={{ left, width }} />
+      </SegmentedControlBody>
   );
 }
