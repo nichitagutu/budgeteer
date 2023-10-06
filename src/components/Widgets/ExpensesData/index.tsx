@@ -4,7 +4,6 @@ import { PieChartData } from "../../../types";
 import { mockPieChartData } from "../../../mock";
 
 const Container = styled.div`
-  margin: 1rem;
   background-color: ${(props) => props.theme.secondary_bg_color};
 
   padding: 0.5rem;

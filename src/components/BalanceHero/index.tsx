@@ -4,7 +4,6 @@ import MonthPicker from "./MonthPicker";
 import GeneralBalance from "./GeneralBalance";
 
 const Body = styled.div`
-  margin: 1rem;
   background-color: ${(props) => props.theme.secondary_bg_color};
 
   border-radius: 9px;

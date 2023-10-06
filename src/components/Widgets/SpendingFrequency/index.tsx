@@ -40,7 +40,6 @@ export default function SpendingFrequency({
 
 const Container = styled.div`
   align-items: center;
-  margin: 1rem;
   background-color: ${(props) => props.theme.secondary_bg_color};
 
   padding: 0.5rem;
