@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import CountUp from "react-countup";
 import styled from "styled-components";
 
 const BalanceNumber = styled.div<{ isHidden?: boolean }>`
@@ -34,10 +35,11 @@ const BalanceFractionHero = styled(BalanceFraction)`
 
 interface CurrencyNumberProps {
   value: number;
+  isHero: boolean;
   isHidden?: boolean;
 }
 
-function CurrencyNumber({ value, isHidden }: CurrencyNumberProps) {
+function CurrencyNumber({ value, isHidden, isHero }: CurrencyNumberProps) {
   const [displayedValue, setDisplayedValue] = useState(value);
   const [isFading, setIsFading] = useState(false);
 
@@ -47,7 +49,7 @@ function CurrencyNumber({ value, isHidden }: CurrencyNumberProps) {
       setTimeout(() => {
         setDisplayedValue("-");
         setIsFading(false);
-      }, 300); // match your transition duration
+      }, 300);
     } else {
       setIsFading(true);
       setTimeout(() => {
@@ -56,6 +58,10 @@ function CurrencyNumber({ value, isHidden }: CurrencyNumberProps) {
       }, 300);
     }
   }, [isHidden, value]);
+
+  const whole = Number.parseInt(displayedValue.toString().split(".")[0]);
+  const fraction =
+    Number.parseInt(displayedValue.toString().split(".")[1]) || 0;
 
   return (
     <BalanceNumber isHidden={isFading}>
@@ -63,48 +69,41 @@ function CurrencyNumber({ value, isHidden }: CurrencyNumberProps) {
         <BalanceWhole>—</BalanceWhole>
       ) : (
         <>
-          <BalanceCurrency>$</BalanceCurrency>
-          <BalanceWhole>{displayedValue}.</BalanceWhole>
-          <BalanceFraction>00</BalanceFraction>
+          {isHero ? (
+            <BalanceCurrencyHero>$</BalanceCurrencyHero>
+          ) : (
+            <BalanceCurrency>$</BalanceCurrency>
+          )}
+          <CountUpBalance value={whole} isHero={isHero} isFraction={false} />
+          .
+          <CountUpBalance value={fraction} isHero={isHero} isFraction={true} />
         </>
       )}
     </BalanceNumber>
   );
 }
 
-function CurrencyNumberHero({ value, isHidden }: CurrencyNumberProps) {
-  const [displayedValue, setDisplayedValue] = useState(value);
-  const [isFading, setIsFading] = useState(false);
-
-  useEffect(() => {
-    if (isHidden) {
-      setIsFading(true);
-      setTimeout(() => {
-        setDisplayedValue("-");
-        setIsFading(false);
-      }, 300);
-    } else {
-      setIsFading(true);
-      setTimeout(() => {
-        setDisplayedValue(value);
-        setIsFading(false);
-      }, 300);
-    }
-  }, [isHidden, value]);
-
+function CountUpBalance({
+  value,
+  isHero,
+  isFraction,
+}: {
+  value: number;
+  isHero: boolean;
+  isFraction: boolean;
+}) {
+  const Wrapper = isHero
+    ? isFraction
+      ? BalanceFractionHero
+      : BalanceWholeHero
+    : isFraction
+    ? BalanceFraction
+    : BalanceWhole;
   return (
-    <BalanceNumber isHidden={isFading}>
-      {displayedValue === "-" ? (
-        <BalanceWholeHero>—</BalanceWholeHero>
-      ) : (
-        <>
-          <BalanceCurrencyHero>$</BalanceCurrencyHero>
-          <BalanceWholeHero>{displayedValue}.</BalanceWholeHero>
-          <BalanceFractionHero>00</BalanceFractionHero>
-        </>
-      )}
-    </BalanceNumber>
+    <Wrapper>
+      <CountUp start={0} end={value} duration={1.6} />
+    </Wrapper>
   );
 }
 
-export { CurrencyNumberHero, CurrencyNumber };
+export { CurrencyNumber };

@@ -56,7 +56,7 @@ export default function GeneralBalance() {
   return (
     <Body>
       <MonthlyBalanceText>Monthly Balance</MonthlyBalanceText>
-      <CurrencyNumberHero value={500} isHidden={isHiddenBalance} />
+      <CurrencyNumber value={500} isHidden={isHiddenBalance} isHero={true} />
       <HideBalanceButton>
         <EyeIcon onClick={handleHideBalance} src={Eye} alt="Eye Icon" />
       </HideBalanceButton>
@@ -65,7 +65,7 @@ export default function GeneralBalance() {
         <BalanceChartWrapper>
           <BalanceDataWrapper>
             <BalanceText>Income</BalanceText>
-            <CurrencyNumber value={400} isHidden={isHiddenBalance} />
+            <CurrencyNumber value={400} isHidden={isHiddenBalance} isHero={false} />
           </BalanceDataWrapper>
           <BalanceCharts value={1} color="#30D158" />
         </BalanceChartWrapper>
@@ -74,7 +74,7 @@ export default function GeneralBalance() {
           <BalanceCharts value={0.6} color="#FF453A" />
           <BalanceDataWrapper>
             <BalanceText>Expenses</BalanceText>
-            <CurrencyNumber value={200} isHidden={isHiddenBalance} />
+            <CurrencyNumber value={200} isHidden={isHiddenBalance} isHero={false} />
           </BalanceDataWrapper>
         </BalanceChartWrapper>
       </BalanceChartsWrapper>
