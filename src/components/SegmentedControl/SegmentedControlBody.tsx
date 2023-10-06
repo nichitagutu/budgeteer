@@ -15,7 +15,7 @@ const Body = styled.div`
   width: 100%;
 `;
 
-export default function SegmentedContorolBody({
+export default function SegmentedControlBody({
   children,
 }: {
   children: React.ReactNode;
