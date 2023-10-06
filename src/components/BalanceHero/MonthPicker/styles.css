@@ -1,9 +1,3 @@
-body {
-  margin: 0;
-  font-family: "Inter", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
 .wheel.keen-slider {
   display: block;
   color: var(--tg-theme-text-color);
@@ -11,11 +5,13 @@ body {
   overflow: visible;
   width: 100%;
 }
+
 .wheel--perspective-right .wheel__inner {
   perspective-origin: calc(50% + 100px) 50%;
   transform: translateX(10px);
   -webkit-transform: translateX(10px);
 }
+
 .wheel--perspective-left .wheel__inner {
   perspective-origin: calc(50% - 100px) 50%;
   transform: translateX(-10px);
@@ -40,11 +36,9 @@ body {
 
 .wheel__shadow-top,
 .wheel__shadow-bottom {
-  background: linear-gradient(
-    to bottom,
-    rgba(239, 239, 243, 0.9) 0%,
-    rgba(239, 239, 243, 0.5) 100%
-  );
+  background: linear-gradient(to bottom,
+      rgba(239, 239, 243, 0.9) 0%,
+      rgba(239, 239, 243, 0.5) 100%);
   left: 0;
   height: calc(42% + 2px);
   width: 100%;
@@ -55,11 +49,9 @@ body {
 }
 
 .wheel__shadow-bottom {
-  background: linear-gradient(
-    to bottom,
-    rgba(239, 239, 243, 0.5) 0%,
-    rgba(239, 239, 243, 0.9) 100%
-  );
+  background: linear-gradient(to bottom,
+      rgba(239, 239, 243, 0.5) 0%,
+      rgba(239, 239, 243, 0.9) 100%);
   margin-top: 2px;
   border-bottom: none;
   border-top: 0.5px solid rgba(255, 255, 255, 0.3);
