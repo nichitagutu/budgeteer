@@ -4,8 +4,6 @@ import { useState, useEffect } from "react";
 
 import Wheel from "./Wheel";
 
-import "./styles.css";
-
 const Overlay = styled.div<{ show: boolean }>`
   position: fixed;
   top: 0;
@@ -102,6 +100,19 @@ export default function MonthPicker() {
   useEffect(() => {
     setTempSelectedMonth(selectedMonth);
     setTempSelectedYear(selectedYear);
+  }, [isDropdownOpen]);
+
+  useEffect(() => {
+    if (isDropdownOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    // Cleanup function to reset the body overflow when the component is unmounted
+    return () => {
+      document.body.style.overflow = "auto";
+    };
   }, [isDropdownOpen]);
 
   const handleMonthChange = (value: string) => {
