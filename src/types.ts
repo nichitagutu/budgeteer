@@ -28,6 +28,22 @@ export type AppTheme = {
   button_color: string;
   button_text_color: string;
   secondary_bg_color: string;
-}
+};
 
-export type ThemeType = 'day-iOS' | 'day-Android' | 'night-iOS' | 'night-Android' | 'auto';
+export type BillsAndSubsData = {
+  due: Date;
+  amount: number;
+  name: string;
+  tags: string[];
+};
+
+export type BillsAndSubsProps = {
+  data: BillsAndSubsData[];
+};
+
+export type ThemeType =
+  | "day-iOS"
+  | "day-Android"
+  | "night-iOS"
+  | "night-Android"
+  | "auto";

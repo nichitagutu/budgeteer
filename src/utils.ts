@@ -4,7 +4,9 @@ export function colorToRGBA(hex: string, opacity: number) {
   }
 
   if (!/^#[0-9a-fA-F]{6}$/.test(hex)) {
-    throw new Error("Invalid HEX color format. Expected format: #RRGGBB. Got " + hex);
+    throw new Error(
+      "Invalid HEX color format. Expected format: #RRGGBB. Got " + hex
+    );
   }
 
   const alpha = Math.round(opacity * 255)
@@ -12,4 +14,15 @@ export function colorToRGBA(hex: string, opacity: number) {
     .padStart(2, "0");
 
   return `${hex}${alpha}`;
+}
+
+export function blurColor(color: string, fallback: string, alpha: number) {
+  let fillColor;
+  try {
+    fillColor = colorToRGBA(color, alpha);
+  } catch (error) {
+    fillColor = colorToRGBA(fallback, alpha);
+  }
+
+  return fillColor;
 }

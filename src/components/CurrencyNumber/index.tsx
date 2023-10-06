@@ -7,16 +7,15 @@ const BalanceNumber = styled.div<{ isHidden?: boolean }>`
   opacity: ${({ isHidden }) => (isHidden ? 0 : 1)};
 `;
 
-const BalanceCurrency = styled.span`
-  font-size: 1.5rem;
+const BalanceWholeSmall = styled.span`
+  font-size: 0.8rem;
 `;
 
-const BalanceCurrencyHero = styled(BalanceCurrency)`
-  font-size: 2rem;
-  font-weight: 700;
+const BalanceWholeMedium = styled(BalanceWholeSmall)`
+  font-size: 1rem;
 `;
 
-const BalanceWhole = styled.span`
+const BalanceWhole = styled(BalanceWholeMedium)`
   font-size: 1.5rem;
 `;
 
@@ -25,7 +24,15 @@ const BalanceWholeHero = styled(BalanceWhole)`
   font-weight: 700;
 `;
 
-const BalanceFraction = styled.span`
+const BalanceFractionSmall = styled.span`
+  font-size: 0.6rem;
+`;
+
+const BalanceFractionMedium = styled(BalanceFractionSmall)`
+  font-size: 0.8rem;
+`;
+
+const BalanceFraction = styled(BalanceFractionMedium)`
   font-size: 1rem;
 `;
 
@@ -35,11 +42,11 @@ const BalanceFractionHero = styled(BalanceFraction)`
 
 interface CurrencyNumberProps {
   value: number;
-  isHero: boolean;
+  size: 'small' | 'medium' | 'big' | 'large';
   isHidden?: boolean;
 }
 
-function CurrencyNumber({ value, isHidden, isHero }: CurrencyNumberProps) {
+function CurrencyNumber({ value, isHidden, size }: CurrencyNumberProps) {
   const [displayedValue, setDisplayedValue] = useState(value);
   const [isFading, setIsFading] = useState(false);
 
@@ -69,14 +76,18 @@ function CurrencyNumber({ value, isHidden, isHero }: CurrencyNumberProps) {
         <BalanceWhole>—</BalanceWhole>
       ) : (
         <>
-          {isHero ? (
-            <BalanceCurrencyHero>$</BalanceCurrencyHero>
+          {size === "large" ? (
+            <BalanceWholeHero>$</BalanceWholeHero>
+          ) : size === "big" ? (
+            <BalanceWhole>$</BalanceWhole>
+          ) : size === "medium" ? (
+            <BalanceWholeMedium>$</BalanceWholeMedium>
           ) : (
-            <BalanceCurrency>$</BalanceCurrency>
+            <BalanceWholeSmall>$</BalanceWholeSmall>
           )}
-          <CountUpBalance value={whole} isHero={isHero} isFraction={false} />
+          <CountUpBalance value={whole} size={size} isFraction={false} />
           .
-          <CountUpBalance value={fraction} isHero={isHero} isFraction={true} />
+          <CountUpBalance value={fraction} size={size} isFraction={true} />
         </>
       )}
     </BalanceNumber>
@@ -85,23 +96,33 @@ function CurrencyNumber({ value, isHidden, isHero }: CurrencyNumberProps) {
 
 function CountUpBalance({
   value,
-  isHero,
+  size,
   isFraction,
 }: {
   value: number;
-  isHero: boolean;
+  size: string;
   isFraction: boolean;
 }) {
-  const Wrapper = isHero
-    ? isFraction
+  const Wrapper = isFraction
+    ? size === "large"
       ? BalanceFractionHero
-      : BalanceWholeHero
-    : isFraction
-    ? BalanceFraction
-    : BalanceWhole;
+      : size === "big"
+      ? BalanceFraction
+      : size === "medium"
+      ? BalanceFractionMedium
+      : BalanceFractionSmall
+    : size === "large"
+    ? BalanceWholeHero
+    : size === "big"
+    ? BalanceWhole
+    : size === "medium"
+    ? BalanceWholeMedium
+    : BalanceWholeSmall;
+
   return (
     <Wrapper>
-      <CountUp start={0} end={value} duration={1.6} />
+      {isFraction && value < 10 ? "0" : ""}
+      <CountUp start={0} startVal={0} end={value} duration={1.6} />
     </Wrapper>
   );
 }

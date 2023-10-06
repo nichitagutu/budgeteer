@@ -1,6 +1,7 @@
 import styled, { useTheme } from "styled-components";
 
 import HorseshoeChart from "../../Charts/HorseshoeChart";
+import { Container, Header } from "../Reusables";
 
 export default function FinancialHealth({
   percentage = 0,
@@ -11,7 +12,7 @@ export default function FinancialHealth({
 
   return (
     <Container>
-      <Title>Financial Health</Title>
+      <Header>Financial Health</Header>
       <Content>
         <ChartWrapper>
           <HorseshoeChart percentage={percentage} />
@@ -28,19 +29,6 @@ export default function FinancialHealth({
     </Container>
   );
 }
-
-const Container = styled.div`
-  align-items: center;
-  background-color: ${(props) => props.theme.secondary_bg_color};
-
-  padding: 0.5rem;
-
-  border-radius: 7px;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  min-height: 200px;
-`;
 
 const ChartWrapper = styled.div`
   width: 50%;
@@ -61,13 +49,6 @@ const TextWrapper = styled.div`
   gap: 0.6rem;
   width: 50%;
 `;
-
-const Title = styled.h3`
-  flex: 1;
-  align-self: flex-start;
-`;
-
-const Header = styled.h3``;
 
 const Text = styled.p`
   text-align: center;

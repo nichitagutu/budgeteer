@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import * as d3 from "d3";
 import { LineChartData, LineChartProps } from "../../types";
 import { useTheme } from "styled-components";
-import { colorToRGBA } from "../../utils";
+import { blurColor } from "../../utils";
 
 export default function LineChart({ data, isMock }: LineChartProps) {
   const svgRef = useRef<SVGSVGElement>(null);
@@ -21,15 +21,11 @@ export default function LineChart({ data, isMock }: LineChartProps) {
 
     const svg = d3.select(svgRef.current);
 
-    let fillColor;
-    try {
-      fillColor = colorToRGBA(theme.secondary_bg_color, 0.85);
-    } catch (error) {
-      fillColor = colorToRGBA(
-        window.Telegram.WebApp.themeParams.secondary_bg_color,
-        0.85
-      );
-    }
+    const fillColor = blurColor(
+      theme.secondary_bg_color,
+      window.Telegram.WebApp.themeParams.secondary_bg_color,
+      0.85
+    );
 
     svg
       .append("rect")

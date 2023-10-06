@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import styled from "styled-components";
 import { useTransition, animated } from "react-spring";
 import ExpensesData from "../components/Widgets/ExpensesData";
@@ -7,6 +7,8 @@ import BalanceHero from "../components/BalanceHero";
 import SpendingFrequency from "../components/Widgets/SpendingFrequency";
 import FinancialHealth from "../components/Widgets/FinancialHealth";
 import SegmentedControl from "../components/SegmentedControl";
+import BillsAndSubs from "../components/Widgets/Bills&Subs";
+import { BillsAndSubsData } from "../types";
 
 const MainWrapper = styled.div`
   background-color: ${(props) => props.theme.bg_color};
@@ -69,6 +71,33 @@ export default function MainPage() {
     config: { tension: 1750, friction: 100 },
   });
 
+  const billsAndSubsData: BillsAndSubsData[] = [
+    {
+      due: new Date(2021, 2, 1),
+      amount: 500,
+      name: "Netflix",
+      tags: ["Entertainment", "Subscriptions"],
+    },
+    {
+      due: new Date(2021, 2, 2),
+      amount: 1000,
+      name: "Rent",
+      tags: ["Housing", "Bills"],
+    },
+    {
+      due: new Date(2021, 2, 3),
+      amount: 200,
+      name: "Spotify",
+      tags: ["Entertainment", "Subscriptions"],
+    },
+    {
+      due: new Date(2021, 2, 4),
+      amount: 100,
+      name: "Phone",
+      tags: ["Bills", "Subscriptions"],
+    },
+  ];
+
   return (
     <MainWrapper>
       <BalanceHero />
@@ -80,6 +109,7 @@ export default function MainPage() {
               <ExpensesData expensesData={mockPieChartData} />
               <FinancialHealth />
               <SpendingFrequency />
+              <BillsAndSubs data={billsAndSubsData} />
             </AnimatedContainer>
           ) : (
             <AnimatedContainer style={style}>

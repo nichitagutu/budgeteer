@@ -2,19 +2,7 @@ import styled from "styled-components";
 import PieChart from "../../Charts/PieChart";
 import { PieChartData } from "../../../types";
 import { mockPieChartData } from "../../../mock";
-
-const Container = styled.div`
-  background-color: ${(props) => props.theme.secondary_bg_color};
-
-  padding: 0.5rem;
-
-  border-radius: 7px;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-`;
-
-const Header = styled.h3``;
+import { Container, Header } from "../Reusables";
 
 const ContentWrapper = styled.div`
   flex: 1;

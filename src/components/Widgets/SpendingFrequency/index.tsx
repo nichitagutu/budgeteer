@@ -4,6 +4,7 @@ import LineChart from "../../Charts/LineChart";
 import { useState } from "react";
 import { generateMockData } from "../../../mock";
 import { LineChartData } from "../../../types";
+import { Container, Header } from "../Reusables";
 
 export default function SpendingFrequency({
   data,
@@ -31,27 +32,9 @@ export default function SpendingFrequency({
 
   return (
     <Container>
-      <Title>Spending Frequency</Title>
+      <Header>Spending Frequency</Header>
       <SegmentedControl tabNames={tabs} onTabChange={onTabChange} />
       <LineChart data={dataToPass} isMock={isMock} />
     </Container>
   );
 }
-
-const Container = styled.div`
-  align-items: center;
-  background-color: ${(props) => props.theme.secondary_bg_color};
-
-  padding: 0.5rem;
-
-  border-radius: 7px;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  min-height: 200px;
-`;
-
-const Title = styled.h3`
-  flex: 1;
-  align-self: flex-start;
-`;
