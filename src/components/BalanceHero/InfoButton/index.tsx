@@ -7,7 +7,7 @@ const Image = styled.img`
 
 export default function InfoButton() {
   function onIconClick() {
-    open("https://telegra.ph/POZHALUJSTA-POMOGITE-10-02", "_blank");
+    open("https://telegra.ph/POZHALUJSTA-POMOGITE-10-02", "_self");
   }
 
   return (

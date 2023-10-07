@@ -64,7 +64,7 @@ function BillsAndSubsItem({ item }: { item: BillsAndSubsData }) {
         </Tags>
       </NameAndTagsWrapper>
       <NumberWrapper>
-        <CurrencyNumber value={item.amount} size="medium" />
+        <CurrencyNumber value={item.amount} baseSize={1} />
       </NumberWrapper>
     </ItemWrapper>
   );

@@ -16,13 +16,6 @@ const ActiveTabIndicator = styled(animated.div)`
   left: 2px;
   bottom: 2px;
   right: 2px;
-
-  -webkit-touch-callout: none; /* iOS Safari */
-  -webkit-user-select: none; /* Safari, Chrome, Opera, Samsung */
-  -khtml-user-select: none; /* Konqueror HTML */
-  -moz-user-select: none; /* Firefox */
-  -ms-user-select: none; /* Edge, IE */
-  user-select: none; /* Modern browsers */
 `;
 
 interface TabType {
@@ -64,7 +57,10 @@ export default function SegmentedControl({
     tabRef: React.RefObject<HTMLDivElement>
   ) => {
     setActiveIndex(index);
-    onTabChange(index);
+
+    if (onTabChange) {
+      onTabChange(index);
+    }
 
     const currentTab = tabRef.current;
 

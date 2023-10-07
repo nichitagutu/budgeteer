@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Eye from "../../../assets/eye.svg";
 import BalanceCharts from "./BalanceCharts";
-import { CurrencyNumber, CurrencyNumberHero } from "../../CurrencyNumber";
+import { CurrencyNumber } from "../../CurrencyNumber";
 import { useState } from "react";
 
 const Body = styled.div`
@@ -56,7 +56,12 @@ export default function GeneralBalance() {
   return (
     <Body>
       <MonthlyBalanceText>Monthly Balance</MonthlyBalanceText>
-      <CurrencyNumber value={500} isHidden={isHiddenBalance} size={"large"} />
+      <CurrencyNumber
+        value={500}
+        isHidden={isHiddenBalance}
+        baseSize={2}
+        isBold={true}
+      />
       <HideBalanceButton>
         <EyeIcon onClick={handleHideBalance} src={Eye} alt="Eye Icon" />
       </HideBalanceButton>
@@ -65,7 +70,11 @@ export default function GeneralBalance() {
         <BalanceChartWrapper>
           <BalanceDataWrapper>
             <BalanceText>Income</BalanceText>
-            <CurrencyNumber value={400} isHidden={isHiddenBalance} size="big" />
+            <CurrencyNumber
+              value={400}
+              isHidden={isHiddenBalance}
+              baseSize={1.5}
+            />
           </BalanceDataWrapper>
           <BalanceCharts value={1} color="#30D158" />
         </BalanceChartWrapper>
@@ -74,7 +83,11 @@ export default function GeneralBalance() {
           <BalanceCharts value={0.6} color="#FF453A" />
           <BalanceDataWrapper>
             <BalanceText>Expenses</BalanceText>
-            <CurrencyNumber value={200} isHidden={isHiddenBalance} size="big" />
+            <CurrencyNumber
+              value={200}
+              isHidden={isHiddenBalance}
+              baseSize={1.5}
+            />
           </BalanceDataWrapper>
         </BalanceChartWrapper>
       </BalanceChartsWrapper>

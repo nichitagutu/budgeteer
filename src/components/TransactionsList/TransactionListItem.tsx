@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { CurrencyNumber } from "../CurrencyNumber";
 
 const TransactionRecordStyled = styled.div`
   display: flex;
@@ -87,16 +88,23 @@ export default function TransactionListItem({
 
       <DataContainer>
         <DescriptionCategoryContainer>
-          <Description>{truncateText(transaction.description, 24)}</Description>
-          <Category>#{truncateText(transaction.category, 24)}</Category>
+          <Description>{truncateText(transaction.description, 20)}</Description>
+          <Category>#{truncateText(transaction.category, 20)}</Category>
         </DescriptionCategoryContainer>
 
         <TypeValueContainer transactionType={transactionType}>
           <Value>
-            {transactionType === "Income" ? "+" : "-"}$
-            {transactionType === "Income"
-              ? transaction.value
-              : transaction.value * -1}
+            {transactionType === "Income" ? "+" : "-"}
+            <CurrencyNumber
+              value={
+                transactionType === "Income"
+                  ? transaction.value
+                  : transaction.value * -1
+              }
+              baseSize={1.1}
+              isBold={false}
+              duration={1.2}
+            />
           </Value>
 
           <TransactionType>{transactionType}</TransactionType>
