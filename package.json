@@ -10,11 +10,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@twa-dev/mark42": "^0.0.38",
+    "@types/": "twa-dev/mark42",
     "@types/d3": "^7.4.1",
     "d3": "^7.8.5",
     "date-fns": "^2.30.0",
-    "keen-slider": "^6.8.6",
     "framer-motion": "^10.16.4",
+    "keen-slider": "^6.8.6",
     "react": "^18.2.0",
     "react-countup": "^6.4.2",
     "react-dom": "^18.2.0",

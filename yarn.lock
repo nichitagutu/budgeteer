@@ -1020,7 +1020,7 @@
   resolved "https://registry.yarnpkg.com/@babel/regjsgen/-/regjsgen-0.8.0.tgz#f0ba69b075e1f05fb2825b7fad991e7adbb18310"
   integrity sha512-x/rqGMdzj+fWZvCOYForTghzbtqPDZ5gPwaoNGHdgDfF2QA/XZbCBp4Moo5scrkAMPhB7z26XM/AaHuIJdgauA==
 
-"@babel/runtime@^7.21.0", "@babel/runtime@^7.8.4":
+"@babel/runtime@^7.18.9", "@babel/runtime@^7.21.0", "@babel/runtime@^7.8.4":
   version "7.23.1"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.23.1.tgz#72741dc4d413338a91dcb044a86f3c0bc402646d"
   integrity sha512-hC2v6p8ZSI/W0HUzh3V8C5g+NwSKzKPtJwSpTjwl0o297GP9+ZLQSkdvHz46CM3LqyoXxq+5G9komY+eSqSO0g==
@@ -1488,6 +1488,35 @@
   version "0.1.5"
   resolved "https://registry.yarnpkg.com/@swc/types/-/types-0.1.5.tgz#043b731d4f56a79b4897a3de1af35e75d56bc63a"
   integrity sha512-myfUej5naTBWnqOCc/MdVOLVjXUXtIA+NpDrDBKJtLLg2shUjBu3cZmB/85RyitKc55+lUUyl7oRfLOvkr2hsw==
+
+"@twa-dev/mark42@^0.0.38":
+  version "0.0.38"
+  resolved "https://registry.yarnpkg.com/@twa-dev/mark42/-/mark42-0.0.38.tgz#ee0e33dcd6298962e04d7c8484222a963a0b2acd"
+  integrity sha512-p1Fbr78lrhXSQWsCIY/UoKJfUbiVfe1tDoHKebSY2/WNbZk/Xl6r/Knvk7lGTUz7m0Ky0DEmmnXMLx8Ohs4NWA==
+  dependencies:
+    "@babel/runtime" "^7.18.9"
+    "@twa-dev/sdk" "^6.7.1"
+    classnames "^2.3.1"
+
+"@twa-dev/sdk@^6.7.1":
+  version "6.9.0"
+  resolved "https://registry.yarnpkg.com/@twa-dev/sdk/-/sdk-6.9.0.tgz#ad159c596d01dd2d66aa5a905bffdaa170fcf7f4"
+  integrity sha512-HP5LFRoSVqHXoRrjBqTQqTFy1R7TORmykqOucRH8C1ZGgO76u2ezthCFqxk5ERW5WXOm2bVkQf1Hbv9tLaEszg==
+  dependencies:
+    "@twa-dev/types" "^6.9.0"
+
+"@twa-dev/types@^6.9.0":
+  version "6.9.0"
+  resolved "https://registry.yarnpkg.com/@twa-dev/types/-/types-6.9.0.tgz#5f978e63dcb8ec507ae2b035774ff568c5ebb69a"
+  integrity sha512-hBkIuJgVtkLAPPhKsNfgyBpgS+15spzUScy5jgpfPJPqXPaaUVDTaWHbeEUU+lUgHmryeQjWyz+UjS7987Pyaw==
+
+"@types/@twa-dev/mark42":
+  version "0.0.38"
+  resolved "https://codeload.github.com/twa-dev/mark42/tar.gz/1528017888a3131b1b83deb92d2b595263746292"
+  dependencies:
+    "@babel/runtime" "^7.18.9"
+    "@twa-dev/sdk" "^6.7.1"
+    classnames "^2.3.1"
 
 "@types/d3-array@*":
   version "3.0.8"
@@ -2005,6 +2034,11 @@ chokidar@^3.4.0:
   optionalDependencies:
     fsevents "~2.3.2"
 
+classnames@^2.3.1:
+  version "2.3.2"
+  resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.3.2.tgz#351d813bf0137fcc6a76a16b88208d2560a0d924"
+  integrity sha512-CSbhY4cFEJRe6/GQzIk5qXZ4Jeg5pcsP7b5peFSDpffpe1cqjASH/n9UTjBwOp6XpMSTwQ8Za2K5V02ueA7Tmw==
+
 color-convert@^1.9.0:
   version "1.9.3"
   resolved "https://registry.yarnpkg.com/color-convert/-/color-convert-1.9.3.tgz#bb71850690e1f136567de629d2d5471deda4c1e8"
@@ -2056,6 +2090,11 @@ core-js-compat@^3.31.0, core-js-compat@^3.32.2:
   dependencies:
     browserslist "^4.22.1"
 
+countup.js@^2.5.0:
+  version "2.8.0"
+  resolved "https://registry.yarnpkg.com/countup.js/-/countup.js-2.8.0.tgz#64951f2df3ede28839413d654d8fef28251c32a8"
+  integrity sha512-f7xEhX0awl4NOElHulrl4XRfKoNH3rB+qfNSZZyjSZhaAoUk6elvhH+MNxMmlmuUJ2/QNTWPSA7U4mNtIAKljQ==
+
 create-react-class@^15.6.3:
   version "15.7.0"
   resolved "https://registry.yarnpkg.com/create-react-class/-/create-react-class-15.7.0.tgz#7499d7ca2e69bb51d13faf59bd04f0c65a1d6c1e"
@@ -2063,11 +2102,6 @@ create-react-class@^15.6.3:
   dependencies:
     loose-envify "^1.3.1"
     object-assign "^4.1.1"
-
-countup.js@^2.5.0:
-  version "2.8.0"
-  resolved "https://registry.yarnpkg.com/countup.js/-/countup.js-2.8.0.tgz#64951f2df3ede28839413d654d8fef28251c32a8"
-  integrity sha512-f7xEhX0awl4NOElHulrl4XRfKoNH3rB+qfNSZZyjSZhaAoUk6elvhH+MNxMmlmuUJ2/QNTWPSA7U4mNtIAKljQ==
 
 cross-spawn@^7.0.2:
   version "7.0.3"

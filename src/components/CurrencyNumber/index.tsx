@@ -42,7 +42,7 @@ const BalanceFractionHero = styled(BalanceFraction)`
 
 interface CurrencyNumberProps {
   value: number;
-  size: 'small' | 'medium' | 'big' | 'large';
+  size: "small" | "medium" | "big" | "large";
   isHidden?: boolean;
 }
 

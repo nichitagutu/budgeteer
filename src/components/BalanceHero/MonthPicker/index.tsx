@@ -108,8 +108,6 @@ export default function MonthPicker() {
     } else {
       document.body.style.overflow = "auto";
     }
-
-    // Cleanup function to reset the body overflow when the component is unmounted
     return () => {
       document.body.style.overflow = "auto";
     };
