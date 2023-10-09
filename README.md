@@ -9,7 +9,8 @@ It grew into the mini app from us  tracking personal finances in <i>Google Sheet
 
 
 ### Team 
-The team behind this mini app is <a href="github.com/qpwedev"> qdev studio</a>. 
+The team behind this mini app is <a href="github.com/qpwedev"> qdev studio</a>. <br>
+We are a small team developing various dApps, apps, TWAs and crafting cool motion/graphic design.
 
 ## Key functionality
 The app allows to go through the<b> whole flow of the personal finances tracking</b>: <br>
