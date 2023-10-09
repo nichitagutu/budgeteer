@@ -1,6 +1,9 @@
 # Project intro
 Budgeteer is a personal finance tracker app that <b>we developed for ourselves and all our friends</b> that are willing to get summarized statistics based on their income and expenses and understand the spending habits. 
 
+### Team 
+The team behind this mini app is <a href="github.com/qpwedev"> qdev studio</a>. 
+
 ## Key functionality
 The app allows to go through the<b> whole flow of the personal finances tracking</b>: <br>
 <li> Authentificating with Telegram to create an account </li>
@@ -22,10 +25,10 @@ We envision that the TWAs will become organic and familiar for the users and suc
 # Third-party integrations 
 For the mini app development we used a couple of different integrations to support the PoC.
 
-## Data visualisation
+### Data visualisation
 For data visualisation we used a <a href="https://d3js.org/"> D3 by Observable library.
 
-## UI Implementation
+### UI Implementation
 <li>For the date picker we implemented a react-ios-picker</a>, </li>
 <li>the emoji picker is from <a href="https://github.com/ealush/emoji-picker-react"> ealush's library </a>, </li>
 <li> Animations are done with the help of <a href="https://www.react-spring.dev/"> React Spring</a></li>
