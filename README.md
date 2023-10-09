@@ -23,8 +23,7 @@ We envision that the TWAs will become organic and familiar for the users and suc
 For the mini app development we used a couple of different integrations to support the PoC.
 
 ## Data visualisation
-For data visualisation we used a
-<li><a href="https://d3js.org/"> D3 by Observable</a> </li>
+For data visualisation we used a <a href="https://d3js.org/"> D3 by Observable library.
 
 ## UI Implementation
 <li>For the date picker we implemented a react-ios-picker</a>, </li>
