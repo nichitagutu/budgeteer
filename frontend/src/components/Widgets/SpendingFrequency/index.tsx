@@ -1,10 +1,9 @@
-import styled from "styled-components";
 import SegmentedControl from "../../SegmentedControl";
-import LineChart from "../../Charts/LineChart";
+import LineChart from "../../charts/LineChart";
 import { useState } from "react";
 import { generateMockData } from "../../../mock";
 import { LineChartData } from "../../../types";
-import { Container, Header } from "../Reusables";
+import { Container, Header } from "../reusables";
 
 export default function SpendingFrequency({
   data,

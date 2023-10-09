@@ -1,7 +1,7 @@
 import styled, { useTheme } from "styled-components";
 
-import HorseshoeChart from "../../Charts/HorseshoeChart";
-import { Container, Header } from "../Reusables";
+import HorseshoeChart from "../../charts/HorseshoeChart";
+import { Container, Header } from "../reusables";
 
 export default function FinancialHealth({
   percentage = 0,

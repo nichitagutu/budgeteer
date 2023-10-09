@@ -13,14 +13,23 @@ const Body = styled.div`
   align-items: center;
 `;
 
-export default function BalanceHero({ transactionData }: any) {
+export default function BalanceHero({
+  transactionData,
+  setOpenAddTransaction,
+}: {
+  setOpenAddTransaction: (type: "Income" | "Spend") => void;
+  transactionData: any;
+}) {
   return (
     <Body>
       <InfoButton />
 
       <MonthPicker />
 
-      <GeneralBalance transactionData={transactionData} />
+      <GeneralBalance
+        transactionData={transactionData}
+        setOpenAddTransaction={setOpenAddTransaction}
+      />
     </Body>
   );
 }

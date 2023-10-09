@@ -46,7 +46,13 @@ const BalanceDataWrapper = styled.div`
 
 const BalanceText = styled.div``;
 
-export default function GeneralBalance({ transactionData }: any) {
+export default function GeneralBalance({
+  transactionData,
+  setOpenAddTransaction,
+}: {
+  transactionData: any;
+  setOpenAddTransaction: (type: "Income" | "Spend") => void;
+}) {
   const [isHiddenBalance, setIsHiddenBalance] = useState(false);
 
   function handleHideBalance() {
@@ -76,11 +82,21 @@ export default function GeneralBalance({ transactionData }: any) {
               baseSize={1.5}
             />
           </BalanceDataWrapper>
-          <BalanceCharts value={1} color="#30D158" />
+          <BalanceCharts
+            type="Income"
+            value={1}
+            color="#30D158"
+            setOpenAddTransaction={setOpenAddTransaction}
+          />
         </BalanceChartWrapper>
 
         <BalanceChartWrapper style={{ marginLeft: "-10px" }}>
-          <BalanceCharts value={0.6} color="#FF453A" />
+          <BalanceCharts
+            type="Spend"
+            value={0.6}
+            color="#FF453A"
+            setOpenAddTransaction={setOpenAddTransaction}
+          />
           <BalanceDataWrapper>
             <BalanceText>Expenses</BalanceText>
             <CurrencyNumber

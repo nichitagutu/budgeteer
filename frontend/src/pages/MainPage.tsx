@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { useTransition, animated } from "react-spring";
 import ExpensesData from "../components/Widgets/ExpensesData";
@@ -70,7 +70,10 @@ const AnimatedContainer = animated(styled.div`
 `);
 
 export default function MainPage() {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
+  const [transactionType, setTransactionType] = useState<"Income" | "Spend">(
+    "Income"
+  );
   const Tabs = ["Analytics", "Transactions"];
   const [activeTab, setActiveTab] = useState<string>(Tabs[0]);
   const [prevTabIndex, setPrevTabIndex] = useState<number>(0);
@@ -102,18 +105,67 @@ export default function MainPage() {
     leave: {
       transform: isMovingRight ? "translateX(-120%)" : "translateX(120%)",
     },
-    config: {
-      tension: 1750,
-      friction: 100,
-    },
+    config: { tension: 1750, friction: 100 },
   });
 
-  console.log(transactions);
+  const initData = useParsedInitData();
+
+  if (initData) {
+    console.log(initData);
+  }
+
+  useEffect(() => {
+    async function requestTransactions() {
+      const response = await axios.get(
+        "https://db0a-78-128-179-166.ngrok-free.app/transactions/user/428313379",
+        {
+          params: {
+            initData:
+              "query_id=AAEji4cZAAAAACOLhxk7NlGT&user=%7B%22id%22%3A428313379%2C%22first_name%22%3A%22Nichita%22%2C%22last_name%22%3A%22%22%2C%22username%22%3A%22vsmisl3%22%2C%22language_code%22%3A%22en%22%2C%22is_premium%22%3Atrue%2C%22allows_write_to_pm%22%3Atrue%7D&auth_date=1696850240&hash=522c7cad973382450f8f064c6fdebcbc262df05719bcd14548ad2853a9100a15",
+          },
+          headers: {
+            "ngrok-skip-browser-warning": "true",
+          },
+        }
+      );
+      console.log(response.data);
+      const transactions = response.data;
+
+      return transactions;
+    }
+
+    const reuslt = requestTransactions();
+    console.log(reuslt);
+  });
+
+  function setOpenAddTransaction(type: "Income" | "Spend") {
+    setTransactionType(type);
+    setIsOpen(true);
+  }
+
+  function setCloseAddTransaction() {
+    setIsOpen(false);
+    setExitModal(true);
+  }
+
+  useEffect(() => {
+    if (isOpen) {
+      window.Telegram.WebApp.BackButton.onClick(setCloseAddTransaction);
+      window.Telegram.WebApp.BackButton.show();
+    } else {
+      setExitModal(false);
+      window.Telegram.WebApp.BackButton.offClick(setCloseAddTransaction);
+      window.Telegram.WebApp.BackButton.hide();
+    }
+  }, [isOpen]);
+
+  const [exitModal, setExitModal] = useState(false);
 
   return (
     <MainWrapper>
       {loading || !transactions ? (
         <BalanceHero
+          setOpenAddTransaction={setOpenAddTransaction}
           transactionData={{
             totalBalance: 0,
             totalIncome: 0,
@@ -121,7 +173,10 @@ export default function MainPage() {
           }}
         />
       ) : (
-        <BalanceHero transactionData={transactions} />
+        <BalanceHero
+          transactionData={transactions}
+          setOpenAddTransaction={setOpenAddTransaction}
+        />
       )}
       <SegmentedControl onTabChange={onTabChange} tabNames={Tabs} />
       <ContentContainer>
@@ -130,14 +185,20 @@ export default function MainPage() {
             <AnimatedContainer style={style}>
               {loading || !transactions ? (
                 <>
-                  <ExpensesData expensesData={mockPieChartData} />
+                  <ExpensesData
+                    expensesData={mockPieChartData}
+                    setOpenAddTransaction={setOpenAddTransaction}
+                  />
                   <FinancialHealth />
                   <SpendingFrequency />
                   <BillsAndSubs data={billsAndSubsData} />
                 </>
               ) : (
                 <>
-                  <ExpensesData expensesData={transactions.pieChartData} />
+                  <ExpensesData
+                    expensesData={transactions.transactions}
+                    setOpenAddTransaction={setOpenAddTransaction}
+                  />
                   <FinancialHealth />
                   <SpendingFrequency />
                   <BillsAndSubs data={billsAndSubsData} />
@@ -155,10 +216,10 @@ export default function MainPage() {
           )
         )}
       </ContentContainer>
-      {/* 
+
       <ModalWindow isOpen={isOpen} initialRender={initialRender}>
-        <AddTransaction />
-      </ModalWindow> */}
+        <AddTransaction exited={exitModal} type={transactionType} />
+      </ModalWindow>
     </MainWrapper>
   );
 }

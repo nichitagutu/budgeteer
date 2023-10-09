@@ -5,9 +5,17 @@ type BarChartProps = {
   margin?: string;
   value: number;
   color: string;
+  type: "Income" | "Spend";
+  setOpenAddTransaction: (type: "Income" | "Spend") => void;
 };
 
-export default function BarChart({ margin, value, color }: BarChartProps) {
+export default function BarChart({
+  margin,
+  value,
+  color,
+  type,
+  setOpenAddTransaction,
+}: BarChartProps) {
   const svgRef = useRef<SVGSVGElement>(null);
 
   if (value > 1) {
@@ -51,7 +59,12 @@ export default function BarChart({ margin, value, color }: BarChartProps) {
     const path = svg
       .append("path")
       .attr("d", generatePathData(initialBarHeight))
-      .attr("fill", color);
+      .attr("fill", color)
+      .on("click", () => {
+        if (setOpenAddTransaction) {
+          setOpenAddTransaction(type);
+        }
+      });
 
     path
       .transition()

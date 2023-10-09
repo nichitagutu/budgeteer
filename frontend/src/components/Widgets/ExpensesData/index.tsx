@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import PieChart from "../../Charts/PieChart";
+import PieChart from "../../charts/PieChart";
 import { PieChartData } from "../../../types";
 import { mockPieChartData } from "../../../mock";
-import { Button, Container, Header } from "../Reusables";
+import { Button, Container, Header } from "../reusables";
 
 const ContentWrapper = styled.div`
   flex: 1;
@@ -31,8 +31,10 @@ const EmptyWrapper = styled.div`
 
 export default function ExpensesData({
   expensesData,
+  setOpenAddTransaction,
 }: {
   expensesData: PieChartData[];
+  setOpenAddTransaction: (type: "Income" | "Spend") => void;
 }) {
   let dataToBePassed = expensesData;
   const isNoData = expensesData === undefined || expensesData.length === 0;
@@ -57,7 +59,11 @@ export default function ExpensesData({
               your expenses by categories to view the categories pie chart and
               detailed statistics.
             </EmptyDescription>
-            <Button>Add spend</Button>
+            <Button
+              onClick={() => {
+                setOpenAddTransaction("Income");
+              }}
+            >Add spend</Button>
           </EmptyWrapper>
         ) : (
           <Categories>

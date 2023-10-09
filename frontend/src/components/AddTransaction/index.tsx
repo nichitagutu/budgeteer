@@ -1,5 +1,5 @@
 import styled, { useTheme } from "styled-components";
-import { Button, Header, ModalContainer } from "../Widgets/Reusables";
+import { Button, Header, ModalContainer } from "../Widgets/reusables";
 import { useEffect, useState } from "react";
 import LeftChevron from "../../assets/left-chevron.svg";
 import MonthPick from "../../assets/double-chevrons.svg";
@@ -8,24 +8,44 @@ import EmojiPicker from "emoji-picker-react";
 import axios from "axios";
 import { blurColor, invertColor } from "../../utils";
 import { API_URL } from "../../constants";
+import useMainButton from "../../hooks/useMainButton";
 
-export default function AddTransaction() {
-  const [type, setType] = useState("Income");
+export default function AddTransaction({
+  type: transactionType,
+  exited
+}: {
+  type: "Income" | "Spend";
+  exited: boolean;
+}) {
+  const [type, setType] = useState(transactionType);
   const [inputValue, setInputValue] = useState("");
-  const [category, setCategory] = useState("Category");
+  const [category, setCategory] = useState("Tag");
   const [isEditingCategory, setIsEditingCategory] = useState(false);
-  const [description, setDescription] = useState("");
+  const [description, setDescription] = useState("Description");
   const [isEditingDescription, setIsEditingDescription] = useState(false);
-  const [emoji, setEmoji] = useState("💰");
-  const [isEditingEmoji, setIsEditingEmoji] = useState(false);
+  const [emoji, setEmoji] = useState("😀");
 
-  const APIUrl = "https://db0a-78-128-179-166.ngrok-free.app";
   const initData = window.Telegram.WebApp.initData;
   const initDataUnsafe = window.Telegram.WebApp.initDataUnsafe;
 
+  useEffect(() => {
+    setType(transactionType);
+  }, [transactionType]);
+
+  useEffect(() => {
+    if (exited) {
+      setInputValue("");
+      setCategory("Tag");
+      setIsEditingCategory(false);
+      setDescription("Description");
+      setIsEditingDescription(false);
+      setEmoji("😀");
+    }
+  }, [exited]);
+
   async function fetchTransactions() {
     const response = await axios.get(
-      `${APIUrl}/transactions/user/${initDataUnsafe?.user?.id}`,
+      `${API_URL}/transactions/user/${initDataUnsafe?.user?.id}`,
       {
         params: {
           initData,
@@ -41,12 +61,6 @@ export default function AddTransaction() {
     return transactions;
   }
 
-  useEffect(() => {
-    console.log("fetching transactions", window.Telegram.WebApp.initData);
-
-    fetchTransactions();
-  }, []);
-
   const user = initDataUnsafe.user;
 
   async function saveTransaction() {
@@ -55,7 +69,7 @@ export default function AddTransaction() {
       {
         user_id: user.id,
         value: type === "Income" ? +inputValue : -inputValue,
-        description: "Description",
+        description,
         category,
         emoji,
       },
@@ -74,6 +88,20 @@ export default function AddTransaction() {
     return transactions;
   }
 
+  useMainButton(
+    () => {
+      console.log(
+        "handleMainButtonClick",
+        inputValue,
+        description,
+        category,
+        emoji
+      );
+    },
+    [inputValue, description, category, emoji],
+    "Save"
+  );
+
   return (
     <ModalContainer>
       <Wrapper>
@@ -83,6 +111,53 @@ export default function AddTransaction() {
             <Button onClick={saveTransaction}>Save</Button>
           </HeaderWrapper>
           <DropdownButton type={type} setType={setType} />
+          <TagsWrapper>
+            <LeftSide>
+              <EmojiButton emoji={emoji} setEmoji={setEmoji} />
+              <TagsTextWrapper>
+                {isEditingDescription ? (
+                  <TagInput
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    onBlur={() => setIsEditingDescription(false)}
+                    autoFocus
+                  />
+                ) : isEditingCategory ? (
+                  <TagWrapper
+                    onClick={() => setIsEditingDescription(true)}
+                    style={{ cursor: "pointer" }}
+                  >
+                    {description}
+                  </TagWrapper>
+                ) : (
+                  <Tag
+                    onClick={() => setIsEditingDescription(true)}
+                    style={{ cursor: "pointer" }}
+                  >
+                    {description}
+                  </Tag>
+                )}
+                {isEditingCategory ? (
+                  <TagInput
+                    value={category}
+                    onChange={(e) => setCategory(e.target.value)}
+                    onBlur={() => setIsEditingCategory(false)}
+                    autoFocus
+                  />
+                ) : (
+                  <TagWrapper
+                    onClick={() => setIsEditingCategory(true)}
+                    style={{ cursor: "pointer" }}
+                  >
+                    {category}
+                  </TagWrapper>
+                )}
+              </TagsTextWrapper>
+            </LeftSide>
+            <RightSide>
+              <img src={LeftChevron} />
+            </RightSide>
+          </TagsWrapper>
           <InputWrapper>
             <InputSign>{type === "Income" ? "+" : "-"}$</InputSign>
             <Input
@@ -100,36 +175,53 @@ export default function AddTransaction() {
             />
           </InputWrapper>
         </UpperPart>
-        <TagsWrapper>
-          <LeftSide>
-            <EmojiWrapper>{emoji}</EmojiWrapper>
-            <TagsTextWrapper>
-              {isEditingCategory ? (
-                <TagInput
-                  value={category}
-                  onChange={(e) => setCategory(e.target.value)}
-                  onBlur={() => setIsEditingCategory(false)}
-                  autoFocus
-                />
-              ) : (
-                <Tag
-                  onClick={() => setIsEditingCategory(true)}
-                  style={{ cursor: "pointer" }}
-                >
-                  {category}
-                </Tag>
-              )}
-              <TagWrapper>Tag</TagWrapper>
-            </TagsTextWrapper>
-          </LeftSide>
-          <RightSide>
-            <img src={LeftChevron} />
-          </RightSide>
-        </TagsWrapper>
       </Wrapper>
     </ModalContainer>
   );
 }
+
+function EmojiButton({ emoji, setEmoji }) {
+  const [isEmojiPickerOpen, setEmojiPickerOpen] = useState(false);
+
+  const onEmojiClick = (emojiObject) => {
+    setEmoji(emojiObject.emoji);
+    setEmojiPickerOpen(false);
+  };
+
+  return (
+    <div>
+      <EmojiButtonWrapper
+        onClick={() => setEmojiPickerOpen(!isEmojiPickerOpen)}
+      >
+        {emoji}
+      </EmojiButtonWrapper>
+      {isEmojiPickerOpen && (
+        <EmojiPickerWrapper>
+          <EmojiPicker
+            onEmojiClick={onEmojiClick}
+            width={"100%"}
+            height={"350px"}
+            autoFocusSearch={false}
+          />
+        </EmojiPickerWrapper>
+      )}
+    </div>
+  );
+}
+
+const EmojiButtonWrapper = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  border: none;
+  font-size: 1.5rem;
+`;
+
+const EmojiPickerWrapper = styled.div`
+  position: absolute;
+  z-index: 1000;
+`;
 
 function DropdownButton({
   type,
@@ -286,6 +378,8 @@ const LeftSide = styled.div`
   flex-direction: row;
 
   gap: 0.4rem;
+
+  align-items: center;
 `;
 
 const RightSide = styled.div``;
