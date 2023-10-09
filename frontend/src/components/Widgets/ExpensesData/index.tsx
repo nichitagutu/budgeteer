@@ -2,7 +2,7 @@ import styled from "styled-components";
 import PieChart from "../../Charts/PieChart";
 import { PieChartData } from "../../../types";
 import { mockPieChartData } from "../../../mock";
-import { Container, Header } from "../Reusables";
+import { Button, Container, Header } from "../Reusables";
 
 const ContentWrapper = styled.div`
   flex: 1;
@@ -18,18 +18,6 @@ const ContentWrapper = styled.div`
 const EmptyDescription = styled.p`
   font-size: 0.8rem;
   font-weight: 300;
-`;
-
-const Button = styled.button`
-  font-size: 1rem;
-  font-weight: 500;
-  width: 8.5rem;
-  padding: 0.5rem 1.5rem;
-  border-radius: 12px;
-  border: none;
-  background-color: ${(props) => props.theme.button_color};
-  color: ${(props) => props.theme.button_text_color};
-  cursor: pointer;
 `;
 
 const EmptyWrapper = styled.div`
