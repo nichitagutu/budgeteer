@@ -103,11 +103,21 @@ export default function GeneralBalance({
               baseSize={1.5}
             />
           </BalanceDataWrapper>
-          <BalanceCharts value={incomeCoef} color="#30D158" />
+          <BalanceCharts
+            type="Income"
+            value={incomeCoef}
+            color="#30D158"
+            setOpenAddTransaction={setOpenAddTransaction}
+          />
         </BalanceChartWrapper>
 
         <BalanceChartWrapper style={{ marginLeft: "-10px" }}>
-          <BalanceCharts value={expensesCoef} color="#FF453A" />
+          <BalanceCharts
+            type="Spend"
+            value={expensesCoef}
+            color="#FF453A"
+            setOpenAddTransaction={setOpenAddTransaction}
+          />
           <BalanceDataWrapper>
             <BalanceText>Expenses</BalanceText>
             <CurrencyNumber
