@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 import DateHeader from "./DateHeader"; // Adjust path if required
 import TransactionListItem from "./TransactionListItem"; // Adjust path if required

@@ -13,6 +13,7 @@
     "@twa-dev/mark42": "^0.0.38",
     "@types/": "twa-dev/mark42",
     "@types/d3": "^7.4.1",
+    "axios": "^1.5.1",
     "d3": "^7.8.5",
     "date-fns": "^2.30.0",
     "framer-motion": "^10.16.4",

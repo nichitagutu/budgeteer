@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { useTransition, animated } from "react-spring";
 import ExpensesData from "../components/Widgets/ExpensesData";
@@ -10,6 +10,8 @@ import SegmentedControl from "../components/SegmentedControl";
 import BillsAndSubs from "../components/Widgets/Bills&Subs";
 import { BillsAndSubsData } from "../types";
 import TransasctionsList from "../components/TransactionsList";
+import useParsedInitData from "../hooks/useParsedInitData";
+import axios from "axios";
 
 const billsAndSubsData: BillsAndSubsData[] = [
   {
@@ -163,6 +165,30 @@ export default function MainPage() {
       transform: isMovingRight ? "translateX(-120%)" : "translateX(120%)",
     },
     config: { tension: 1750, friction: 100 },
+  });
+
+  const initData = useParsedInitData();
+
+  if (initData) {
+    console.log(initData);
+  }
+
+  useEffect(() => {
+    async function requestTransactions() {
+      const response = await axios.get("http://localhost:3000/transactions", {
+        params: {
+          initData:
+            "query_id=AAEhh20VAAAAACGHbRUrM6Nt&user=%7B%22id%22%3A359499553%2C%22first_name%22%3A%22qpwe%22%2C%22last_name%22%3A%22%22%2C%22username%22%3A%22qpwedev%22%2C%22language_code%22%3A%22en%22%2C%22is_premium%22%3Atrue%2C%22allows_write_to_pm%22%3Atrue%7D&auth_date=1696787360&hash=ab88ebd8b331a69c40b71486253a34c5f6b26d4a18dfe3cf7fefad28ba48b04a",
+        },
+      });
+      console.log(response.data);
+      const transactions = response.data;
+
+      return transactions;
+    }
+
+    const reuslt = requestTransactions();
+    console.log(reuslt);
   });
 
   return (
