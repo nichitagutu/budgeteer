@@ -33,14 +33,38 @@ We envision that the TWAs will become organic and familiar for the users and suc
 # Third-party integrations 
 For the mini app development we used a couple of different integrations to support the PoC.
 
-### Data visualisation
-For data visualisation we used a <a href="https://d3js.org/"> D3 by Observable library.
-
-### UI Implementation
-<li>For the date picker we implemented a react-ios-picker</a>, </li>
-<li>the emoji picker is from <a href="https://github.com/ealush/emoji-picker-react"> ealush's library </a>, </li>
-<li> Animations are done with the help of <a href="https://www.react-spring.dev/"> React Spring</a></li>
-<li><a href="https://keen-slider.io/">Keen Slider</a> was a library for sliders</li>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Type</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td><a href="https://d3js.org/"> D3 by Observable</td>
+    <td>Data visualisation</td>
+    <td>All of the graphs, bars, charts</td>
+  </tr>
+  <tr>
+    <td>react-ios-picker</td>
+    <td>UI Implementation</td>
+    <td>the date picker</td>
+  </tr>
+        <tr>
+    <td><a href="https://github.com/ealush/emoji-picker-react"> ealush's library </td>
+    <td>UI Implementation</td>
+    <td>the emoji picker</td>
+  </tr>
+        <tr>
+    <td><a href="https://www.react-spring.dev/"> React Spring</a></td>
+    <td>UI Implementation</td>
+    <td>UI framework</td>
+  </tr>
+           <tr>
+    <td><a href="https://keen-slider.io/">Keen Slider</a></td>
+    <td>UI Implementation</td>
+    <td>UI library for sliders</td>
+  </tr>
+</table>
 
 # Set up
 
