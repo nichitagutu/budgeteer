@@ -50,7 +50,7 @@ For the mini app development we used a couple of different integrations to suppo
     <td>the date picker</td>
   </tr>
         <tr>
-    <td><a href="https://github.com/ealush/emoji-picker-react"> ealush's library </td>
+    <td><a href="https://github.com/ealush/emoji-picker-react"> emoji-picker </td>
     <td>UI Implementation</td>
     <td>the emoji picker</td>
   </tr>
