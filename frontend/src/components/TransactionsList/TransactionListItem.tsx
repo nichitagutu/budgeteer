@@ -4,7 +4,7 @@ import { CurrencyNumber } from "../CurrencyNumber";
 const TransactionRecordStyled = styled.div`
   display: flex;
   align-items: center;
-  background-color: #f3f2f8;
+  background-color: var(--tg-theme-bg-color);
   padding: 10px 1rem;
 `;
 

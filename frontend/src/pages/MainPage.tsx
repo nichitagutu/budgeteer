@@ -45,9 +45,11 @@ const billsAndSubsData: BillsAndSubsData[] = [
 ];
 
 const MainWrapper = styled.div`
-  background-color: ${(props) => props.theme.bg_color};
+  background-color: ${(props) => props.theme.secondary_bg_color};
   color: ${(props) => props.theme.text_color};
   margin: 1rem;
+
+  height: 100%;
 
   display: flex;
   flex-direction: column;

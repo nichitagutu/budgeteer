@@ -4,7 +4,7 @@ import MonthPicker from "./MonthPicker";
 import GeneralBalance from "./GeneralBalance";
 
 const Body = styled.div`
-  background-color: ${(props) => props.theme.secondary_bg_color};
+  background-color: ${(props) => props.theme.bg_color};
 
   border-radius: 9px;
   padding: 8px 8px 0 8px;

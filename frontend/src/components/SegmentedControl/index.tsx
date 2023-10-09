@@ -8,7 +8,7 @@ const ActiveTabIndicator = styled(animated.div)`
   position: absolute;
   height: 30px;
   border: 0.5px solid rgba(0, 0, 0, 0.04);
-  background-color: rgba(255, 255, 255, 1);
+  background-color: var(--tg-theme-button-color);
   box-shadow: 0px 3px 1px 0px rgba(0, 0, 0, 0.04),
     0px 3px 8px 0px rgba(0, 0, 0, 0.12);
   border-radius: 7px;

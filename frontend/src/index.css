@@ -22,6 +22,8 @@ body::-webkit-scrollbar {
 body {
   scrollbar-width: none;
   -ms-overflow-style: none;
+  background-color: var(--tg-theme-secondary-bg-color);
+  height: 100%;
 }
 
 .datePicker {
