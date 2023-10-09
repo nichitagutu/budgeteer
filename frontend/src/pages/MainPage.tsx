@@ -164,14 +164,7 @@ export default function MainPage() {
   return (
     <MainWrapper>
       {loading || !transactions ? (
-        <BalanceHero
-          setOpenAddTransaction={setOpenAddTransaction}
-          transactionData={{
-            totalBalance: 0,
-            totalIncome: 0,
-            totalExpenses: 0,
-          }}
-        />
+        <BalanceHero transactionData={{}} />
       ) : (
         <BalanceHero
           transactionData={transactions}
@@ -195,11 +188,16 @@ export default function MainPage() {
                 </>
               ) : (
                 <>
-                  <ExpensesData
-                    expensesData={transactions.transactions}
-                    setOpenAddTransaction={setOpenAddTransaction}
+                  <ExpensesData expensesData={transactions.pieChartData} />
+                  <FinancialHealth
+                    percentage={
+                      transactions.totalExpenses
+                        ? (transactions.totalIncome /
+                            transactions.totalExpenses) *
+                          100
+                        : 0
+                    }
                   />
-                  <FinancialHealth />
                   <SpendingFrequency />
                   <BillsAndSubs data={billsAndSubsData} />
                 </>

@@ -3,6 +3,7 @@ import Eye from "../../../assets/eye.svg";
 import BalanceCharts from "./BalanceCharts";
 import { CurrencyNumber } from "../../CurrencyNumber";
 import { useState } from "react";
+import exp from "constants";
 
 const Body = styled.div`
   display: flex;
@@ -59,6 +60,26 @@ export default function GeneralBalance({
     setIsHiddenBalance(!isHiddenBalance);
   }
 
+  const income = transactionData.totalIncome || 0;
+  const expenses = transactionData.totalExpenses || 0;
+
+  let incomeCoef = 0;
+  let expensesCoef = 0;
+
+  // Safely handle the cases where either income or expenses might be zero.
+  const safeDivision = (numerator: number, denominator: number) => {
+    if (denominator === 0) return 0;
+    return numerator / denominator;
+  };
+
+  if (income >= expenses && expenses !== 0) {
+    incomeCoef = 1;
+    expensesCoef = safeDivision(expenses, income);
+  } else if (expenses > income && income !== 0) {
+    expensesCoef = 1;
+    incomeCoef = safeDivision(income, expenses);
+  }
+
   return (
     <Body>
       <MonthlyBalanceText>Monthly Balance</MonthlyBalanceText>
@@ -82,21 +103,11 @@ export default function GeneralBalance({
               baseSize={1.5}
             />
           </BalanceDataWrapper>
-          <BalanceCharts
-            type="Income"
-            value={1}
-            color="#30D158"
-            setOpenAddTransaction={setOpenAddTransaction}
-          />
+          <BalanceCharts value={incomeCoef} color="#30D158" />
         </BalanceChartWrapper>
 
         <BalanceChartWrapper style={{ marginLeft: "-10px" }}>
-          <BalanceCharts
-            type="Spend"
-            value={0.6}
-            color="#FF453A"
-            setOpenAddTransaction={setOpenAddTransaction}
-          />
+          <BalanceCharts value={expensesCoef} color="#FF453A" />
           <BalanceDataWrapper>
             <BalanceText>Expenses</BalanceText>
             <CurrencyNumber
