@@ -43,4 +43,16 @@ For data visualisation we used a <a href="https://d3js.org/"> D3 by Observable l
 <li><a href="https://keen-slider.io/">Keen Slider</a> was a library for sliders</li>
 
 # Set up
-.....
+
+To run front-end, use
+```
+yarn
+```
+```
+yarn dev
+```
+
+To run back-end, use
+```
+docker-compose up --build
+```
