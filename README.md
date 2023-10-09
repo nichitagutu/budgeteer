@@ -2,6 +2,11 @@
 Budgeteer is a personal finance tracker app that <b>we developed for ourselves and all our friends</b> that are willing to get summarized statistics based on their income and expenses and understand the spending habits. <br>
 <br>
 It grew into the mini app from us  tracking personal finances in <i>Google Sheets</i> but still using <i>"Saved Messages"</i> on <i>Telegram</i> to note something "real quick" before actually adding into the tracking sheet.
+<br>
+<br>
+<br>
+![image](https://github.com/nichitagutu/budgeteer/assets/119045809/5ff16231-3997-4f49-9764-c39f7adc1125)
+
 
 ### Team 
 The team behind this mini app is <a href="github.com/qpwedev"> qdev studio</a>. 
