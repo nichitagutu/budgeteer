@@ -13,7 +13,7 @@ const Body = styled.div`
   align-items: center;
 `;
 
-export default function BalanceHero(transactionData: any) {
+export default function BalanceHero({ transactionData }: any) {
   return (
     <Body>
       <InfoButton />

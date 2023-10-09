@@ -120,7 +120,7 @@ export const getTransactionsByUserId = withInitDataValidation(
 
             const totalBalance = totalIncome + totalExpenses;
 
-            res.status(200).json({ transactions, pieChartData, totalExpenses, totalIncome, totalBalance });
+            res.status(200).json({ transactions, pieChartData, totalExpenses: totalExpenses * -1, totalIncome, totalBalance });
         } catch (error: any) {
             res.status(400).json({ error: error.message });
         }

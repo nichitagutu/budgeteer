@@ -46,16 +46,13 @@ const BalanceDataWrapper = styled.div`
 
 const BalanceText = styled.div``;
 
-export default function GeneralBalance(transactionData: any) {
-  transactionData = transactionData.transactionData.transactionData;
-
+export default function GeneralBalance({ transactionData }: any) {
   const [isHiddenBalance, setIsHiddenBalance] = useState(false);
 
   function handleHideBalance() {
     setIsHiddenBalance(!isHiddenBalance);
   }
 
-  console.log(transactionData, transactionData.totalBalance);
   return (
     <Body>
       <MonthlyBalanceText>Monthly Balance</MonthlyBalanceText>

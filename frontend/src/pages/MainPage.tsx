@@ -113,7 +113,13 @@ export default function MainPage() {
   return (
     <MainWrapper>
       {loading || !transactions ? (
-        <BalanceHero transactionData={null} />
+        <BalanceHero
+          transactionData={{
+            totalBalance: 0,
+            totalIncome: 0,
+            totalExpenses: 0,
+          }}
+        />
       ) : (
         <BalanceHero transactionData={transactions} />
       )}
