@@ -1,5 +1,7 @@
 # Project intro
-Budgeteer is a personal finance tracker app that <b>we developed for ourselves and all our friends</b> that are willing to get summarized statistics based on their income and expenses and understand the spending habits. 
+Budgeteer is a personal finance tracker app that <b>we developed for ourselves and all our friends</b> that are willing to get summarized statistics based on their income and expenses and understand the spending habits. <br>
+<br>
+It grew into the mini app from us  tracking personal finances in <i>Google Sheets</i> but still using <i>"Saved Messages"</i> on <i>Telegram</i> to note something "real quick" before actually adding into the tracking sheet.
 
 ### Team 
 The team behind this mini app is <a href="github.com/qpwedev"> qdev studio</a>. 
@@ -35,30 +37,4 @@ For data visualisation we used a <a href="https://d3js.org/"> D3 by Observable l
 <li><a href="https://keen-slider.io/">Keen Slider</a> was a library for sliders</li>
 
 # Set up
-## React + TypeScript + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-### Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+.....
