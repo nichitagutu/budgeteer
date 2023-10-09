@@ -47,3 +47,12 @@ export type ThemeType =
   | "night-iOS"
   | "night-Android"
   | "auto";
+
+
+
+export interface TransactionType {
+  value: number;
+  category: string;
+  description: string;
+  emoji: string;
+}

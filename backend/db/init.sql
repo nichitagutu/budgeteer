@@ -4,7 +4,8 @@ CREATE TABLE IF NOT EXISTS "user" (
   username VARCHAR(255),
   first_name VARCHAR(255),
   last_name VARCHAR(255),
-  language_code VARCHAR(255)
+  language_code VARCHAR(255),
+  created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS "transaction" (
@@ -13,5 +14,6 @@ CREATE TABLE IF NOT EXISTS "transaction" (
   description VARCHAR(255),
   category VARCHAR(255),
   emoji VARCHAR(10),
-  user_id INTEGER REFERENCES "user"(id)
+  telegram_id INTEGER REFERENCES "user"(telegram_id),
+  created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
 );

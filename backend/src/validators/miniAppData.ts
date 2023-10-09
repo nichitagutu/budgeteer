@@ -27,16 +27,20 @@ export function withInitDataValidation(fn: Function) {
     return async (req: Request, res: Response) => {
         const { initData } = req.query;
 
-        if (!initData) {
-            return res.status(403).json({ error: 'No initData' });
-        }
+        try {
+            if (!initData) {
+                return res.status(403).json({ error: 'No initData' });
+            }
 
-        if (validateMiniAppData(initData)) {
-            const parsedInitData = parseQuery(initData as string);
+            if (validateMiniAppData(initData)) {
+                const parsedInitData = parseQuery(initData as string);
 
-            return await fn(req, res, parsedInitData);
-        } else {
-            return res.status(403).json({ error: 'Invalid initData' });
+                return await fn(req, res, parsedInitData);
+            } else {
+                return res.status(403).json({ error: 'Invalid initData' });
+            }
+        } catch (error: any) {
+            return res.status(500).json({ error: error.message });
         }
     };
 }

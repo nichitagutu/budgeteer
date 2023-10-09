@@ -20,38 +20,38 @@ function App() {
 
   const [theme, setTheme] = useState<ThemeType>(initialTheme);
 
-  const initData = window.Telegram.WebApp.initData;
-  const initDataUnsafe = window.Telegram.WebApp.initDataUnsafe;
-  const user = initDataUnsafe.user;
+  // const initData = window.Telegram.WebApp.initData;
+  // const initDataUnsafe = window.Telegram.WebApp.initDataUnsafe;
+  // const user = initDataUnsafe.user;
 
-  async function addNewUser(user: any) {
-    const response = await axios.post(
-      `${API_URL}/users`,
-      {
-        telegram_id: user.id,
-        username: user.username,
-        first_name: user.first_name,
-        last_name: user.last_name,
-        language_code: user.language_code,
-      },
-      {
-        params: {
-          initData,
-        },
-        headers: {
-          "Content-Type": "application/json",
-          "ngrok-skip-browser-warning": "lmao",
-        },
-      }
-    );
+  // async function addNewUser(user: any) {
+  //   const response = await axios.post(
+  //     `${API_URL}/users`,
+  //     {
+  //       telegram_id: user.id,
+  //       username: user.username,
+  //       first_name: user.first_name,
+  //       last_name: user.last_name,
+  //       language_code: user.language_code,
+  //     },
+  //     {
+  //       params: {
+  //         initData,
+  //       },
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         "ngrok-skip-browser-warning": "lmao",
+  //       },
+  //     }
+  //   );
 
-    const transactions = response.data;
-    return transactions;
-  }
+  //   const transactions = response.data;
+  //   return transactions;
+  // }
 
-  useEffect(() => {
-    addNewUser(user);
-  }, []);
+  // useEffect(() => {
+  //   addNewUser(user);
+  // }, []);
 
   return (
     <ThemeProvider theme={AppThemes[theme]}>

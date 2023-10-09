@@ -170,6 +170,36 @@ export default function MainPage() {
     config: { tension: 1750, friction: 100 },
   });
 
+  const initData = useParsedInitData();
+
+  if (initData) {
+    console.log(initData);
+  }
+
+  useEffect(() => {
+    async function requestTransactions() {
+      const response = await axios.get(
+        "https://db0a-78-128-179-166.ngrok-free.app/transactions/user/428313379",
+        {
+          params: {
+            initData:
+              "query_id=AAEji4cZAAAAACOLhxk7NlGT&user=%7B%22id%22%3A428313379%2C%22first_name%22%3A%22Nichita%22%2C%22last_name%22%3A%22%22%2C%22username%22%3A%22vsmisl3%22%2C%22language_code%22%3A%22en%22%2C%22is_premium%22%3Atrue%2C%22allows_write_to_pm%22%3Atrue%7D&auth_date=1696850240&hash=522c7cad973382450f8f064c6fdebcbc262df05719bcd14548ad2853a9100a15",
+          },
+          headers: {
+            "ngrok-skip-browser-warning": "true",
+          },
+        }
+      );
+      console.log(response.data);
+      const transactions = response.data;
+
+      return transactions;
+    }
+
+    const reuslt = requestTransactions();
+    console.log(reuslt);
+  });
+
   return (
     <MainWrapper>
       <BalanceHero />
