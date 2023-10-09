@@ -46,18 +46,21 @@ const BalanceDataWrapper = styled.div`
 
 const BalanceText = styled.div``;
 
-export default function GeneralBalance() {
+export default function GeneralBalance(transactionData: any) {
+  transactionData = transactionData.transactionData.transactionData;
+
   const [isHiddenBalance, setIsHiddenBalance] = useState(false);
 
   function handleHideBalance() {
     setIsHiddenBalance(!isHiddenBalance);
   }
 
+  console.log(transactionData, transactionData.totalBalance);
   return (
     <Body>
       <MonthlyBalanceText>Monthly Balance</MonthlyBalanceText>
       <CurrencyNumber
-        value={500}
+        value={transactionData.totalBalance || 0}
         isHidden={isHiddenBalance}
         baseSize={2}
         isBold={true}
@@ -71,7 +74,7 @@ export default function GeneralBalance() {
           <BalanceDataWrapper>
             <BalanceText>Income</BalanceText>
             <CurrencyNumber
-              value={400}
+              value={transactionData.totalIncome || 0}
               isHidden={isHiddenBalance}
               baseSize={1.5}
             />
@@ -84,7 +87,7 @@ export default function GeneralBalance() {
           <BalanceDataWrapper>
             <BalanceText>Expenses</BalanceText>
             <CurrencyNumber
-              value={200}
+              value={transactionData.totalExpenses || 0}
               isHidden={isHiddenBalance}
               baseSize={1.5}
             />

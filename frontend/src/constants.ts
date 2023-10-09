@@ -1,1 +1,2 @@
 export const API_URL = 'https://db0a-78-128-179-166.ngrok-free.app';
+export const INIT_DATA = "query_id=AAEji4cZAAAAACOLhxk7NlGT&user=%7B%22id%22%3A428313379%2C%22first_name%22%3A%22Nichita%22%2C%22last_name%22%3A%22%22%2C%22username%22%3A%22vsmisl3%22%2C%22language_code%22%3A%22en%22%2C%22is_premium%22%3Atrue%2C%22allows_write_to_pm%22%3Atrue%7D&auth_date=1696850240&hash=522c7cad973382450f8f064c6fdebcbc262df05719bcd14548ad2853a9100a15"

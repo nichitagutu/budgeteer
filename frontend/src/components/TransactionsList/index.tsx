@@ -3,11 +3,13 @@ import DateHeader from "./DateHeader"; // Adjust path if required
 import TransactionListItem from "./TransactionListItem"; // Adjust path if required
 
 interface Transaction {
-  id: number;
-  value: number;
-  createdAt: string;
   category: string;
+  created_at: string;
   description: string;
+  emoji: string;
+  id: number;
+  telegram_id: number;
+  value: number;
 }
 
 const SublistContainer = styled.div``;
@@ -31,13 +33,18 @@ interface TransactionsListProps {
 export default function TransactionsList({
   transactions,
 }: TransactionsListProps) {
+  console.log(typeof transactions);
+
   const groupedData = transactions.reduce<Record<string, Transaction[]>>(
     (acc, transaction) => {
-      const date = new Date(transaction.createdAt).toLocaleDateString("en-US", {
-        day: "numeric",
-        month: "long",
-        year: "numeric",
-      });
+      const date = new Date(transaction.created_at).toLocaleDateString(
+        "en-US",
+        {
+          day: "numeric",
+          month: "long",
+          year: "numeric",
+        }
+      );
       if (!acc[date]) {
         acc[date] = [];
       }

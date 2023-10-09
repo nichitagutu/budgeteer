@@ -50,7 +50,7 @@ export default function ExpensesData({
       <Header>Expenses</Header>
       <ContentWrapper>
         <PieChart data={dataToBePassed} />
-        {!isNoData ? (
+        {isNoData ? (
           <EmptyWrapper>
             <Header>Log</Header>
             <EmptyDescription>

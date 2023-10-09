@@ -78,7 +78,49 @@ export const getTransactionsByUserId = withInitDataValidation(
         try {
             const telegram_id = initData.user.id;
             const transactions = await listTransactionsByUserIdQuery(telegram_id);
-            res.status(200).json({ transactions });
+
+
+            const groupedTransactions = transactions.reduce((acc, transaction) => {
+                if (transaction.value < 0) {  // Considering only negative values
+                    if (acc[transaction.category]) {
+                        acc[transaction.category] += transaction.value;
+                    } else {
+                        acc[transaction.category] = transaction.value;
+                    }
+                }
+                return acc;
+            }, {});
+
+            const pieChartData = Object.entries(groupedTransactions).map(([category, amount], index) => {
+                const colors = ["#30D158", "#007AFF", "#BF5AF2", "#FFD60A"];
+                return {
+                    category,
+                    // @ts-ignore
+                    amount: Math.abs(amount),
+                    color: colors[index % colors.length],
+                };
+            }).sort((a, b) => b.amount - a.amount);
+
+
+            const totalExpenses = transactions.reduce((acc, transaction) => {
+                if (transaction.value < 0) {
+                    acc += transaction.value;
+                }
+                return acc;
+            }, 0);
+
+            const totalIncome = transactions.reduce((acc, transaction) => {
+                if (transaction.value > 0) {
+                    acc += transaction.value;
+                }
+                return acc;
+            }
+                , 0);
+
+
+            const totalBalance = totalIncome + totalExpenses;
+
+            res.status(200).json({ transactions, pieChartData, totalExpenses, totalIncome, totalBalance });
         } catch (error: any) {
             res.status(400).json({ error: error.message });
         }

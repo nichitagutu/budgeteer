@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import styled from "styled-components";
 import { useTransition, animated } from "react-spring";
 import ExpensesData from "../components/Widgets/ExpensesData";
@@ -14,6 +14,8 @@ import useParsedInitData from "../hooks/useParsedInitData";
 import axios from "axios";
 import ModalWindow from "../components/ModalWindow";
 import AddTransaction from "../components/AddTransaction";
+import useTransactions from "../hooks/useTransactions";
+import { INIT_DATA } from "../constants";
 
 const billsAndSubsData: BillsAndSubsData[] = [
   {
@@ -39,79 +41,6 @@ const billsAndSubsData: BillsAndSubsData[] = [
     amount: 100,
     name: "Phone",
     tags: ["Bills", "Subscriptions"],
-  },
-];
-
-const MockTransactions = [
-  {
-    id: 1,
-    value: 2500,
-    createdAt: "2023-10-06T08:00:00Z",
-    category: "Salary",
-    description: "October month's salary",
-  },
-  {
-    id: 2,
-    value: -50,
-    createdAt: "2023-10-06T11:00:00Z",
-    category: "Groceries",
-    description: "Groceries shopping at Walmart",
-  },
-  {
-    id: 3,
-    value: -15,
-    createdAt: "2023-10-06T15:30:00Z",
-    category: "Dining",
-    description: "Lunch at Subway",
-  },
-  {
-    id: 4,
-    value: -70,
-    createdAt: "2023-10-05T10:20:00Z",
-    category: "Electronics",
-    description: "Buying headphones from Best Buy",
-  },
-  {
-    id: 5,
-    value: -20,
-    createdAt: "2023-10-05T17:45:00Z",
-    category: "Transportation",
-    description: "Gas refilling",
-  },
-  {
-    id: 6,
-    value: -120,
-    createdAt: "2023-10-04T12:10:00Z",
-    category: "Health",
-    description: "Dental check-up",
-  },
-  {
-    id: 7,
-    value: -25,
-    createdAt: "2023-10-04T14:15:00Z",
-    category: "Entertainment",
-    description: "Movie ticket at Cineplex",
-  },
-  {
-    id: 8,
-    value: 150,
-    createdAt: "2023-10-03T13:00:00Z",
-    category: "Gifts",
-    description: "Birthday gift received",
-  },
-  {
-    id: 9,
-    value: -10,
-    createdAt: "2023-10-03T19:20:00Z",
-    category: "Dining",
-    description: "Coffee at Starbucks",
-  },
-  {
-    id: 10,
-    value: -45,
-    createdAt: "2023-10-02T09:45:00Z",
-    category: "Clothing",
-    description: "Buying a shirt from H&M",
   },
 ];
 
@@ -146,6 +75,10 @@ export default function MainPage() {
   const [activeTab, setActiveTab] = useState<string>(Tabs[0]);
   const [prevTabIndex, setPrevTabIndex] = useState<number>(0);
   const initialRender = useRef(true);
+  const { transactions, loading, error } = useTransactions(
+    INIT_DATA,
+    "428313379"
+  );
 
   function onTabChange(index: number) {
     setActiveTab(Tabs[index]);
@@ -163,67 +96,63 @@ export default function MainPage() {
         ? "translateX(120%)"
         : "translateX(-120%)",
     },
-    enter: { transform: "translateX(0%)" },
+    enter: {
+      transform: "translateX(0%)",
+    },
     leave: {
       transform: isMovingRight ? "translateX(-120%)" : "translateX(120%)",
     },
-    config: { tension: 1750, friction: 100 },
+    config: {
+      tension: 1750,
+      friction: 100,
+    },
   });
 
-  const initData = useParsedInitData();
-
-  if (initData) {
-    console.log(initData);
-  }
-
-  useEffect(() => {
-    async function requestTransactions() {
-      const response = await axios.get(
-        "https://db0a-78-128-179-166.ngrok-free.app/transactions/user/428313379",
-        {
-          params: {
-            initData:
-              "query_id=AAEji4cZAAAAACOLhxk7NlGT&user=%7B%22id%22%3A428313379%2C%22first_name%22%3A%22Nichita%22%2C%22last_name%22%3A%22%22%2C%22username%22%3A%22vsmisl3%22%2C%22language_code%22%3A%22en%22%2C%22is_premium%22%3Atrue%2C%22allows_write_to_pm%22%3Atrue%7D&auth_date=1696850240&hash=522c7cad973382450f8f064c6fdebcbc262df05719bcd14548ad2853a9100a15",
-          },
-          headers: {
-            "ngrok-skip-browser-warning": "true",
-          },
-        }
-      );
-      console.log(response.data);
-      const transactions = response.data;
-
-      return transactions;
-    }
-
-    const reuslt = requestTransactions();
-    console.log(reuslt);
-  });
+  console.log(transactions);
 
   return (
     <MainWrapper>
-      <BalanceHero />
+      {loading || !transactions ? (
+        <BalanceHero transactionData={null} />
+      ) : (
+        <BalanceHero transactionData={transactions} />
+      )}
       <SegmentedControl onTabChange={onTabChange} tabNames={Tabs} />
       <ContentContainer>
         {transitions((style, item) =>
           item === "Analytics" ? (
             <AnimatedContainer style={style}>
-              <ExpensesData expensesData={mockPieChartData} />
-              <FinancialHealth />
-              <SpendingFrequency />
-              <BillsAndSubs data={billsAndSubsData} />
+              {loading || !transactions ? (
+                <>
+                  <ExpensesData expensesData={mockPieChartData} />
+                  <FinancialHealth />
+                  <SpendingFrequency />
+                  <BillsAndSubs data={billsAndSubsData} />
+                </>
+              ) : (
+                <>
+                  <ExpensesData expensesData={transactions.pieChartData} />
+                  <FinancialHealth />
+                  <SpendingFrequency />
+                  <BillsAndSubs data={billsAndSubsData} />
+                </>
+              )}
             </AnimatedContainer>
           ) : (
             <AnimatedContainer style={style}>
-              <TransasctionsList transactions={MockTransactions} />
+              {loading || !transactions ? (
+                <p>Loading...</p>
+              ) : (
+                <TransasctionsList transactions={transactions.transactions} />
+              )}
             </AnimatedContainer>
           )
         )}
       </ContentContainer>
-
+      {/* 
       <ModalWindow isOpen={isOpen} initialRender={initialRender}>
         <AddTransaction />
-      </ModalWindow>
+      </ModalWindow> */}
     </MainWrapper>
   );
 }
